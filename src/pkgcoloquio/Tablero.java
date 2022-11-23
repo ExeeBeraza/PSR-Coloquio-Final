@@ -110,54 +110,22 @@ public class Tablero extends JPanel implements ComponentListener, MouseListener,
         ArrayList<Point> celulasobrevivientes = new ArrayList<>(0);
 
         /* Iterar a través de la matriz, seguir las reglas del juego de la vida */
-        for (int i = 1; i < gameBoard.length - 1; i++) {
-            for (int j = 1; j < gameBoard[0].length - 1; j++) {
-                int surrounding = 0;   //Organismos
+        Acomodador acomodador = new Acomodador(gameBoard,celulasobrevivientes);
+        acomodador.start();
 
-                //PREGUNTO EN TODAS LAS POSIBLES DIRECCIONES
-                if (gameBoard[i - 1][j - 1]) {
-                    surrounding++;
-                }
-                if (gameBoard[i - 1][j]) {
-                    surrounding++;
-                }
-                if (gameBoard[i - 1][j + 1]) {
-                    surrounding++;
-                }
-                if (gameBoard[i][j - 1]) {
-                    surrounding++;
-                }
-                if (gameBoard[i][j + 1]) {
-                    surrounding++;
-                }
-                if (gameBoard[i + 1][j - 1]) {
-                    surrounding++;
-                }
-                if (gameBoard[i + 1][j]) {
-                    surrounding++;
-                }
-                if (gameBoard[i + 1][j + 1]) {
-                    surrounding++;
-                }
-                if (gameBoard[i][j]) {
-                    // Celula esta viva, Pudiendo ser 2 o 3
-                    if ((surrounding == 2) || (surrounding == 3)) {
-                        //agrego un nuevo punto al Array en tal posicion
-                        celulasobrevivientes.add(new Point(i - 1, j - 1));
-                    }
-                } else {
-                    // Celula esta muerta, si sucede que el valor es 3
-                    if (surrounding == 3) {
-                        celulasobrevivientes.add(new Point(i - 1, j - 1));
-                    }
-                }
-            }
+        try{
+            acomodador.join();
+        }catch(InterruptedException exception){
+            System.out.println("No se pudieron sincronizar el tablero y el acomodador");
         }
 
         limpiarTablero();
 
         /* AGREGO EL NUEVO ARRAY AL PRINCIPAL */
         point.addAll(celulasobrevivientes);
+        System.out.println("Las celulas sobrevivientes despues del thread...");
+        System.out.println(celulasobrevivientes.size());
+
         repaint();
 
         try {
