@@ -96,6 +96,9 @@ public class JuegoVida extends JFrame implements ActionListener {
             long tiempoFinal = System.currentTimeMillis() - tiempoInicio;
             System.out.printf("El tiempo final para el ciclo parcial es de: %f milisegundos\n", (float) tiempoFinal); /* Duermo el hilo 1000 / en el contenido de movimiento por segundo --->3 */ /* TODO: En caso de que no se pare el hilo. Como lo puedo parar a la fuerza? */
             
+            
+            // Descomentar esta linea para que se ejecute automaticamente el programa pero se trabe la interfaz grafica
+            // inicioJuego(isBeingPlayed);
         } else {
             mi_game_play.setEnabled(true);
             mi_game_stop.setEnabled(false);
