@@ -2,8 +2,6 @@ package pkgcoloquio;
 //-----------------------------------
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;/*Excepción lanzada por métodos que han detectado modificaciones simultáneas de un objeto cuando se modifica no está permitida.*/
 import javax.swing.*;
 
 public class JuegoVida extends JFrame implements ActionListener {
@@ -138,14 +136,14 @@ public class JuegoVida extends JFrame implements ActionListener {
             p_autoFill.add(cb_percent);
             cb_percent.addActionListener((ActionEvent e) -> {
                 if (cb_percent.getSelectedIndex() > 0) {
-                    gb_gameBoard.actualizarTablero();
+                    gb_gameBoard.limpiarTablero();
                     gb_gameBoard.llenarTaberoAzar((Integer) cb_percent.getSelectedItem());
                     f_autoFill.dispose();
                 }
             });
             f_autoFill.setVisible(true);
         } else if (ae.getSource().equals(mi_game_reset)) {
-            gb_gameBoard.actualizarTablero();
+            gb_gameBoard.limpiarTablero();
             gb_gameBoard.repaint();
         } else if (ae.getSource().equals(mi_game_play)) {
             inicioJuego(true);

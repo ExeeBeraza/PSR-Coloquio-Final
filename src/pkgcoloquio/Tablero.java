@@ -46,22 +46,11 @@ public class Tablero extends JPanel implements ComponentListener, MouseListener,
         repaint();
     }
 
-    /*  con eventos del mouse
-    public void addPoint(MouseEvent me) {
-        int x = me.getPoint().x/BLOCK_SIZE-1;
-        int y = me.getPoint().y/BLOCK_SIZE-1;
-        if ((x >= 0) && (x < d_gameBoardSize.width) && (y >= 0) && (y < d_gameBoardSize.height)) {
-            addPoint(x,y);
-        }
-    }
-     */
     public void eliminarPunto(int x, int y) {
-        /*en tal posición elimino*/
         point.remove(new Point(x, y));
     }
 
-    public void actualizarTablero() {
-        //CHAUUUUU TABLERO
+    public void limpiarTablero() {
         point.clear();
     }
 
@@ -110,13 +99,16 @@ public class Tablero extends JPanel implements ComponentListener, MouseListener,
     public void run() {
         // Defino el tablero con valores boleanos --> ¿Evoluciono o no?
         boolean[][] gameBoard = new boolean[d_gameBoardSize.width + 2][d_gameBoardSize.height + 2];
+
         // Recorro lo puntos de la grilla
         for (Point current : point) {
             //Es true en tal lugar
             gameBoard[current.x + 1][current.y + 1] = true;
         }
+
         /*nuevo vector donde se van a guardar todas las nuevas "evoluciones"*/
         ArrayList<Point> celulasobrevivientes = new ArrayList<>(0);
+
         /* Iterar a través de la matriz, seguir las reglas del juego de la vida */
         for (int i = 1; i < gameBoard.length - 1; i++) {
             for (int j = 1; j < gameBoard[0].length - 1; j++) {
@@ -161,18 +153,32 @@ public class Tablero extends JPanel implements ComponentListener, MouseListener,
                 }
             }
         }
-        actualizarTablero();
-        /*AGREGO EL NUEVO ARRAY AL PRINCIPAL (ponele)*/
+
+        limpiarTablero();
+
+        /* AGREGO EL NUEVO ARRAY AL PRINCIPAL */
         point.addAll(celulasobrevivientes);
         repaint();
+
         try {
             /* Duermo el hilo 1000 / en el contenido de movimiento por segundo --->3 */
             Thread.sleep(1000 / i_movesPerSecond);
             /* Dejo correr */
             run();
         } catch (InterruptedException ex) {
+            System.out.println(ex.toString());
         }
     }
+
+    /*  con eventos del mouse
+    public void addPoint(MouseEvent me) {
+        int x = me.getPoint().x/BLOCK_SIZE-1;
+        int y = me.getPoint().y/BLOCK_SIZE-1;
+        if ((x >= 0) && (x < d_gameBoardSize.width) && (y >= 0) && (y < d_gameBoardSize.height)) {
+            addPoint(x,y);
+        }
+    }
+    */
 
     /*MÉTODOS QUE SI NOS LO PONGO ME MARCA ERROR -->*/
     @Override
