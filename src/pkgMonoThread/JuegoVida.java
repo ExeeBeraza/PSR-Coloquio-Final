@@ -1,9 +1,8 @@
-package pkgcoloquio;
+package pkgMonoThread;
 //-----------------------------------
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;/*Excepción lanzada por métodos que han detectado modificaciones simultáneas de un objeto cuando se modifica no está permitida.*/
 import javax.swing.*;
 
 public class JuegoVida extends JFrame implements ActionListener {    

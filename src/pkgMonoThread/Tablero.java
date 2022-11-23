@@ -1,4 +1,4 @@
-package pkgcoloquio;
+package pkgMonoThread;
 //-----------------
 
 import java.awt.*;
@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;/*Excepción lanzada por métodos que han detectado modificaciones simultáneas de un objeto cuando se modifica no está permitida.*/
 import javax.swing.*;
 
-import static pkgcoloquio.JuegoVida.BLOCK_SIZE;
-import static pkgcoloquio.JuegoVida.DEFAULT_WINDOW_SIZE;
-import static pkgcoloquio.JuegoVida.MINIMUM_WINDOW_SIZE;
+import static pkgMonoThread.JuegoVida.BLOCK_SIZE;
+import static pkgMonoThread.JuegoVida.DEFAULT_WINDOW_SIZE;
+import static pkgMonoThread.JuegoVida.MINIMUM_WINDOW_SIZE;
 
 /*
     1) poner el tablero en un archivo aparte 
